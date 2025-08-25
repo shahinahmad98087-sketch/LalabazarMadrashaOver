@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>OnlyMadrashaOver</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255,255,255,0.82);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+      margin-top: 32px;
+      margin-bottom: 20px;
+      padding: 22px 0 12px 0;
+      text-align: center;
+      position: relative;
+    }
+    .logo {
+      font-size: 2.4em;
+      font-weight: bold;
+      letter-spacing: 1.7px;
+      color: #008080;
+      margin-bottom: 2px;
+      font-family: 'Segoe UI', 'Roboto Slab', Arial, sans-serif;
+      text-shadow: 1.5px 1.5px 10px #b2dfdb;
+      /* চাইলে নিচের border/stroke/italic/remove করতে পারো */
+      border-bottom: 2.5px solid #00bfae;
+      padding-bottom: 6px;
+      font-style: italic;
+    }
+    .subtitle {
+      font-size: 1.07em;
+      color: #3a3a3a;
+      font-weight: 400;
+      margin-top: 3px;
+      margin-bottom: 0;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      margin-bottom: 40px;
+    }
+    .box {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 20px;
+      margin-bottom: 18px;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .box:hover {
+      box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+      background: #f5f9ff;
+    }
+    .name {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #2d3748;
+      letter-spacing: 0.5px;
+    }
+    .details {
+      margin-top: 14px;
+      padding: 12px 10px;
+      border-radius: 7px;
+      background: #f3f6fc;
+      transition: all 0.2s;
+      display: none;
+    }
+    .details.rakib {
+      font-weight: 400;
+      color: #444;
+      font-size: 1em;
+      opacity: 0.85;
+    }
+    .details.hafiz {
+      font-weight: bold;
+      color: #205c31;
+      font-size: 1.05em;
+      letter-spacing: 1px;
+      background: #e6fff3;
+      border-left: 5px solid #3ad77b;
+    }
+    .details.salman, .details.kaku {
+      color: #7b7b7b;
+      font-style: italic;
+      font-size: 1em;
+      opacity: 0.75;
+    }
+    @media (max-width: 540px){
+      .header, .container{
+        max-width: 96vw;
+      }
+      .logo {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header/Template Section -->
+  <div class="header">
+    <div class="logo">RHS Back</div>
+    <div class="subtitle">সবার জন্য এক্সক্লুসিভ মাদ্রাসা ওভারভিউ ওয়েবসাইট</div>
+  </div>
+
+  <div class="container">
+    <div class="box" onclick="showDetails('rakib')">
+      <div class="name">Rakib</div>
+      <div class="details rakib" id="rakib-details">
+        Description: Pora likha te halka bhalo, কিন্তু ফাটলা ফুয়া
+      </div>
+    </div>
+    <div class="box" onclick="showDetails('hafiz')">
+      <div class="name">Hafiz</div>
+      <div class="details hafiz" id="hafiz-details">
+        Description: Pora likha ভালো, কিন্তু Strong ও Chill মোড সবসময় অন
+      </div>
+    </div>
+    <div class="box" onclick="showDetails('salman')">
+      <div class="name">Salman</div>
+      <div class="details salman" id="salman-details">
+        কোন তথ্য নেই
+      </div>
+    </div>
+    <div class="box" onclick="showDetails('kaku')">
+      <div class="name">Kaku</div>
+      <div class="details kaku" id="kaku-details">
+        কোন তথ্য নেই
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // সব ডিটেইলস শুরুতে বন্ধ থাকবে
+    document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
+    function showDetails(person) {
+      // সব ডিটেইলস বন্ধ করো
+      document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
+      // ক্লিক করা বক্সের ডিটেইলস দেখাও
+      document.getElementById(person + '-details').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
