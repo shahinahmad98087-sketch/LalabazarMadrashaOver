@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: 'Noto Sans Bengali', 'SolaimanLipi', Arial, sans-serif;
       margin: 0;
       padding: 0;
       min-height: 100vh;
@@ -35,7 +35,6 @@
       margin-bottom: 2px;
       font-family: 'Segoe UI', 'Roboto Slab', Arial, sans-serif;
       text-shadow: 1.5px 1.5px 10px #b2dfdb;
-      /* চাইলে নিচের border/stroke/italic/remove করতে পারো */
       border-bottom: 2.5px solid #00bfae;
       padding-bottom: 6px;
       font-style: italic;
@@ -60,45 +59,76 @@
       padding: 20px;
       margin-bottom: 18px;
       cursor: pointer;
-      transition: box-shadow 0.2s;
+      transition: box-shadow 0.2s, max-height 0.4s cubic-bezier(.61,-0.09,.69,1.09), padding 0.3s;
+      position: relative;
+      max-height: 80px;
+      overflow: hidden;
     }
-    .box:hover {
-      box-shadow: 0 4px 18px rgba(0,0,0,0.13);
-      background: #f5f9ff;
+    .box.expanded {
+      max-height: 330px;
+      background: #e9f5ff;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding-bottom: 38px;
+      cursor: default;
+      overflow: visible;
+      z-index: 2;
     }
     .name {
       font-size: 1.3em;
-      font-weight: 600;
+      font-weight: 700;
       color: #2d3748;
       letter-spacing: 0.5px;
+      margin-bottom: 0;
     }
     .details {
-      margin-top: 14px;
-      padding: 12px 10px;
-      border-radius: 7px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      margin-top: 18px;
+      padding: 18px 16px;
+      border-radius: 10px;
       background: #f3f6fc;
-      transition: all 0.2s;
-      display: none;
+      font-size: 1.12em;
+      box-shadow: 0 0px 20px rgba(0,0,0,.07);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .details.rakib {
-      font-weight: 400;
-      color: #444;
-      font-size: 1em;
-      opacity: 0.85;
+    .box.expanded .details {
+      opacity: 1;
+      pointer-events: auto;
+      display: flex;
     }
-    .details.hafiz {
+    .detail-label {
       font-weight: bold;
-      color: #205c31;
-      font-size: 1.05em;
-      letter-spacing: 1px;
-      background: #e6fff3;
-      border-left: 5px solid #3ad77b;
+      color: #008080;
+      font-size: 1.07em;
+      margin-right: 6px;
+      min-width: 100px;
+      display: inline-block;
     }
-    .details.salman, .details.kaku {
+    .detail-value {
+      font-weight: 400;
+      color: #222;
+      font-size: 1.07em;
+      display: inline-block;
+    }
+    /* Ability special styles */
+    .detail-ability.rakib {
+      color: #c0392b;
+      font-style: italic;
+      font-size: 1.09em;
+    }
+    .detail-ability.hafiz {
+      color: #205c31;
+      font-weight: bold;
+      font-size: 1.11em;
+      letter-spacing: 1px;
+    }
+    .detail-ability.salman, .detail-ability.kaku {
       color: #7b7b7b;
       font-style: italic;
-      font-size: 1em;
-      opacity: 0.75;
+      font-size: 1.07em;
     }
     @media (max-width: 540px){
       .header, .container{
@@ -106,6 +136,13 @@
       }
       .logo {
         font-size: 2em;
+      }
+      .box.expanded {
+        max-height: 400px;
+        padding-bottom: 28px;
+      }
+      .detail-label {
+        min-width: 80px;
       }
     }
   </style>
@@ -118,41 +155,52 @@
   </div>
 
   <div class="container">
-    <div class="box" onclick="showDetails('rakib')">
-      <div class="name">Rakib</div>
-      <div class="details rakib" id="rakib-details">
-        Description: Pora likha te halka bhalo, কিন্তু ফাটলা ফুয়া
+    <!-- Rakib -->
+    <div class="box" onclick="expandBox(this)">
+      <div class="name">রাকিব</div>
+      <div class="details">
+        <div><span class="detail-label">বয়স:</span> <span class="detail-value">১৪</span></div>
+        <div><span class="detail-label">নাম:</span> <span class="detail-value">রাকিব</span></div>
+        <div><span class="detail-label">যোগ্যতা:</span> <span class="detail-value detail-ability rakib">পড়াতে ভালো, কিন্তু শয়তান</span></div>
       </div>
     </div>
-    <div class="box" onclick="showDetails('hafiz')">
-      <div class="name">Hafiz</div>
-      <div class="details hafiz" id="hafiz-details">
-        Description: Pora likha ভালো, কিন্তু Strong ও Chill মোড সবসময় অন
+    <!-- Hafiz -->
+    <div class="box" onclick="expandBox(this)">
+      <div class="name">হাফিজ</div>
+      <div class="details">
+        <div><span class="detail-label">বয়স:</span> <span class="detail-value">১৫</span></div>
+        <div><span class="detail-label">নাম:</span> <span class="detail-value">হাফিজ</span></div>
+        <div><span class="detail-label">যোগ্যতা:</span> <span class="detail-value detail-ability hafiz">স্ট্রং</span></div>
       </div>
     </div>
-    <div class="box" onclick="showDetails('salman')">
-      <div class="name">Salman</div>
-      <div class="details salman" id="salman-details">
-        কোন তথ্য নেই
+    <!-- Salman -->
+    <div class="box" onclick="expandBox(this)">
+      <div class="name">সালমান</div>
+      <div class="details">
+        <div><span class="detail-label">বয়স:</span> <span class="detail-value">??</span></div>
+        <div><span class="detail-label">নাম:</span> <span class="detail-value">সালমান</span></div>
+        <div><span class="detail-label">বর্ণনা:</span> <span class="detail-value detail-ability salman">সালমান সম্পর্কে নির্দিষ্ট কোনো তথ্য নেই</span></div>
       </div>
     </div>
-    <div class="box" onclick="showDetails('kaku')">
-      <div class="name">Kaku</div>
-      <div class="details kaku" id="kaku-details">
-        কোন তথ্য নেই
+    <!-- Kaku -->
+    <div class="box" onclick="expandBox(this)">
+      <div class="name">কাকু</div>
+      <div class="details">
+        <div><span class="detail-label">নাম:</span> <span class="detail-value">কাকু</span></div>
+        <div><span class="detail-label">বর্ণনা:</span> <span class="detail-value detail-ability kaku">কাকু সম্পর্কে নির্দিষ্ট কোনো তথ্য নেই</span></div>
       </div>
     </div>
   </div>
 
   <script>
-    // সব ডিটেইলস শুরুতে বন্ধ থাকবে
-    document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
-    function showDetails(person) {
-      // সব ডিটেইলস বন্ধ করো
-      document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
-      // ক্লিক করা বক্সের ডিটেইলস দেখাও
-      document.getElementById(person + '-details').style.display = 'block';
+    // সব box থেকে expanded class সরিয়ে তারপর ক্লিক করা box-এ expanded class যোগ করবে
+    function expandBox(clickedBox) {
+      document.querySelectorAll('.box').forEach(box => {
+        if(box !== clickedBox) box.classList.remove('expanded');
+      });
+      clickedBox.classList.toggle('expanded');
     }
+    // Default: সব details hide (CSS দিয়ে)
   </script>
 </body>
-</html>
+               </html>
