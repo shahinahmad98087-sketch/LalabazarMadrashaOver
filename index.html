@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Login Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" id="login-container">
+    <h1 class="welcome-message">Welcome!</h1>
+    <p class="instruction">Please enter your name to login:</p>
+    <input type="text" id="username" placeholder="Your Name" autocomplete="off" />
+    <button id="login-btn">Login</button>
+  </div>
+  <div class="container main-container" id="main-container" style="display:none;">
+    <h1 class="greeting" id="greeting"></h1>
+    <button id="logout-btn">Logout</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
