@@ -1,0 +1,127 @@
+<!-- কে কে ভাগা মারছে কালকে - বক্স শুরু -->
+<div class="bhaga-marse-section" onclick="expandBhagaMarse(this)">
+  <div class="bhaga-header">
+    <span class="bhaga-icon">👥</span>
+    <span class="bhaga-title">কে কে ভাগা মারছে কালকে</span>
+  </div>
+  <div class="bhaga-tags" id="bhaga-tags">
+    <!-- এখানে নামগুলো ছোট ট্যাগ আকারে দেখাবে -->
+    <span class="bhaga-tag">Ashrafull</span>
+    <span class="bhaga-tag">Hafizur2</span>
+    <span class="bhaga-tag">Sipon</span>
+    <!-- নতুন নাম এখানে add করবে -->
+  </div>
+  <div class="bhaga-details">
+    <!-- ক্লিক করলে নামগুলো বড় আকারে দেখাবে -->
+    <div class="bhaga-name-list">
+      <div class="bhaga-name">Ashrafull</div>
+      <div class="bhaga-name">Hafizur2</div>
+      <div class="bhaga-name">Sipon</div>
+      <!-- নতুন নাম এখানে add করবে -->
+    </div>
+  </div>
+</div>
+<!-- কে কে ভাগা মারছে কালকে - বক্স শেষ -->
+
+<style>
+.bhaga-marse-section {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.11);
+  margin: 24px auto 30px auto;
+  padding: 18px 18px 14px 18px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, max-height 0.5s cubic-bezier(.61,-0.09,.69,1.09), padding 0.3s;
+  position: relative;
+  max-height: 92px;
+  overflow: hidden;
+}
+.bhaga-marse-section.expanded {
+  max-height: 320px;
+  background: #e5f7ff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+  padding-bottom: 28px;
+  overflow: visible;
+  z-index: 2;
+}
+.bhaga-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.bhaga-icon {
+  font-size: 1.7em;
+  margin-right: 6px;
+  margin-top: 2px;
+}
+.bhaga-title {
+  font-size: 1.28em;
+  font-weight: bold;
+  color: #007b7b;
+  letter-spacing: 0.5px;
+}
+.bhaga-tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bhaga-tag {
+  background: #d1f4fd;
+  color: #005c6e;
+  font-size: 1em;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin-bottom: 3px;
+}
+.bhaga-details {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  margin-top: 18px;
+  padding: 18px 4px 6px 4px;
+  border-radius: 8px;
+  background: #f3f6fc;
+  font-size: 1.14em;
+  box-shadow: 0 0px 20px rgba(0,0,0,.07);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bhaga-marse-section.expanded .bhaga-details {
+  opacity: 1;
+  pointer-events: auto;
+  display: flex;
+}
+.bhaga-name-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  padding-left: 12px;
+}
+.bhaga-name {
+  font-size: 1.22em;
+  font-weight: bold;
+  color: #008080;
+  background: #e0f7fa;
+  border-radius: 8px;
+  padding: 7px 16px;
+  margin-bottom: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+@media (max-width: 540px){
+  .bhaga-marse-section{
+    max-width: 98vw;
+  }
+}
+</style>
+<script>
+function expandBhagaMarse(clickedBox) {
+  clickedBox.classList.toggle('expanded');
+}
+</script>
